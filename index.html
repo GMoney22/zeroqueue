@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Zero Queue</title>
+</head>
+<body>
+    
+    <h1>Would you watch this movie?</h1>
+
+    <p id="showMovie"></p></p>
+    
+    <button id="change" onclick="addMovie()">Yes</button>
+    <button id="change" onclick="removeMovie()">No</button>
+
+    <br><br>
+
+    <button id="likedButton" onclick="showLiked()">Show Liked</button>
+
+    
+    <p id="showLikedList"></p>
+
+
+<script>
+var moviesUnsorted = [
+    "Down to Earth",
+    "The Business of Drugs",
+    "The Old Guard",
+    "Memory Games",
+    "Devil at the Crossroads",
+    "13th",
+    "Breaking Bad",
+    "Tiny House Nation",
+    "Cemedians in Cars Getting Coffee",
+    "Alone",
+    "Bill Nye Saves the World",
+    "The Degenerates",
+    "Daredevil",
+    "The Last Dance",
+    "The Office",
+    "El Camino",
+    "Norsemen",
+    "Community",
+    "Avatar The Last Airbender",
+    "Unsolved Mysteries",
+    "Dark",
+    "Ozark",
+    "The Umbrella Academy",
+    "Dexter",
+    "Stranger Things",
+    "The Witcher",
+    "Sherlock",
+    "New Girl",
+    "Grad Designs",
+    "Shitt's Creek",
+    "Doomsday Prepppers",
+    "Street Food Latin America",
+    "That 70's Show "
+];
+
+// The movie to be voted liked or disliked, the liked list and the disliked list (naughy list?)
+
+var movieYesOrNo = [];
+var moviesLiked = [];
+var moviesDisliked = [];
+var i = 0;
+
+// Sort the liked list into html ul
+
+function bulletTheList() {
+    var moviesLikedLength = moviesLiked.length;
+    var moviesLikedBullet = "";
+    var y = 0;
+
+    moviesLikedBullet = "<ul>";
+    for (y = 0; y < moviesLikedLength; y++) {
+        moviesLikedBullet += "<li>" + moviesLiked[y] + "</li>";
+    }
+    moviesLikedBullet += "</ul>";
+    document.getElementById("showLikedList").innerHTML = moviesLikedBullet
+}
+
+// Add any movies from the liked list to visable liked list
+function showLiked () {
+    if (document.getElementById("likedButton").innerHTML == "Show Liked") {
+        bulletTheList();
+        document.getElementById("likedButton").innerHTML = "Hide Liked";
+    }
+    else  {
+        document.getElementById("showLikedList").innerHTML = "";
+        document.getElementById("likedButton").innerHTML = "Show Liked";
+    }
+
+}
+
+
+// Show a new movie to vote on
+function showNewMovie() {
+    document.getElementById("showMovie").innerHTML = moviesUnsorted[i];
+}
+
+
+// Show the movie for the first time on page load
+showNewMovie();
+
+
+// User clicked "Yes", so let's add that to the liked movie list
+function addMovie() {
+    moviesLiked.push(moviesUnsorted[i]);
+    delete moviesUnsorted[i];
+    if (document.getElementById("likedButton").innerHTML == "Hide Liked") {
+        showLiked();
+    }
+    i++;
+    showNewMovie();
+}
+
+// User clicked "No", so let's remove that shit. Add to movies disliked list moviesDisliked
+function removeMovie() {
+    moviesDisliked.push(moviesUnsorted[i]);
+    delete moviesUnsorted[i];
+    i++;
+    showNewMovie();
+}
+
+
+</script>
+</p>
+
+
+</body>
+</html>
